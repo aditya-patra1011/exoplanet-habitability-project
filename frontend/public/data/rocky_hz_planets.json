@@ -1,0 +1,306 @@
+[
+  {
+    "planet_name": "Kepler-62 f",
+    "source": "confirmed",
+    "insolation_flux": 0.5,
+    "eq_temp_k": 208.0,
+    "radius_earth": 1.41,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "TRAPPIST-1 d",
+    "source": "confirmed",
+    "insolation_flux": 1.115,
+    "eq_temp_k": 286.2,
+    "radius_earth": 0.788,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "TRAPPIST-1 e",
+    "source": "confirmed",
+    "insolation_flux": 0.646,
+    "eq_temp_k": 249.7,
+    "radius_earth": 0.92,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "TRAPPIST-1 f",
+    "source": "confirmed",
+    "insolation_flux": 0.373,
+    "eq_temp_k": 217.7,
+    "radius_earth": 1.045,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "TRAPPIST-1 g",
+    "source": "confirmed",
+    "insolation_flux": 0.252,
+    "eq_temp_k": 197.3,
+    "radius_earth": 1.129,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "TOI-700 d",
+    "source": "confirmed",
+    "insolation_flux": 0.85,
+    "eq_temp_k": 268.8,
+    "radius_earth": 1.073,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "TOI-700 e",
+    "source": "confirmed",
+    "insolation_flux": 1.27,
+    "eq_temp_k": 272.9,
+    "radius_earth": 0.953,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "LP 890-9 c",
+    "source": "confirmed",
+    "insolation_flux": 0.906,
+    "eq_temp_k": 272.0,
+    "radius_earth": 1.367,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "L 98-59 f",
+    "source": "confirmed",
+    "insolation_flux": 1.1,
+    "eq_temp_k": 285.0,
+    "radius_earth": 1.48,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "GJ 1061 d",
+    "source": "confirmed",
+    "insolation_flux": 0.6,
+    "eq_temp_k": 242.03,
+    "radius_earth": 1.16,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "GJ 1002 b",
+    "source": "confirmed",
+    "insolation_flux": 0.67,
+    "eq_temp_k": 230.9,
+    "radius_earth": 1.03,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "Teegarden's Star c",
+    "source": "confirmed",
+    "insolation_flux": 0.35,
+    "eq_temp_k": 209.0,
+    "radius_earth": 1.02,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "GJ 3378 b",
+    "source": "confirmed",
+    "insolation_flux": 0.91,
+    "eq_temp_k": 272.0,
+    "radius_earth": 1.32,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "Kepler-1649 c",
+    "source": "confirmed",
+    "insolation_flux": 0.75,
+    "eq_temp_k": 234.0,
+    "radius_earth": 1.06,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "GJ 667 C f",
+    "source": "confirmed",
+    "insolation_flux": 0.5633,
+    "eq_temp_k": null,
+    "radius_earth": 1.45,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "TOI-715 b",
+    "source": "confirmed",
+    "insolation_flux": 0.67,
+    "eq_temp_k": 234.0,
+    "radius_earth": 1.55,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "GJ 1061 c",
+    "source": "confirmed",
+    "insolation_flux": 1.4,
+    "eq_temp_k": 304.12,
+    "radius_earth": 1.19,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "GJ 667 C e",
+    "source": "confirmed",
+    "insolation_flux": 0.3022,
+    "eq_temp_k": null,
+    "radius_earth": 1.45,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "Kepler-186 f",
+    "source": "confirmed",
+    "insolation_flux": 0.3,
+    "eq_temp_k": 177.0,
+    "radius_earth": 1.17,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "Kepler-296 e",
+    "source": "confirmed",
+    "insolation_flux": 1.41,
+    "eq_temp_k": 337.0,
+    "radius_earth": 1.53,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "Kepler-1229 b",
+    "source": "confirmed",
+    "insolation_flux": 0.524,
+    "eq_temp_k": 212.0,
+    "radius_earth": 1.4,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "K2-72 e",
+    "source": "confirmed",
+    "insolation_flux": 1.2,
+    "eq_temp_k": 286.34,
+    "radius_earth": 1.29,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "Ross 128 b",
+    "source": "confirmed",
+    "insolation_flux": 1.38,
+    "eq_temp_k": 301.0,
+    "radius_earth": 1.11,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "K2-3 d",
+    "source": "confirmed",
+    "insolation_flux": 1.44,
+    "eq_temp_k": 305.2,
+    "radius_earth": 1.458,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "Proxima Cen b",
+    "source": "confirmed",
+    "insolation_flux": 0.641,
+    "eq_temp_k": 218.0,
+    "radius_earth": 1.02,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "Wolf 1069 b",
+    "source": "confirmed",
+    "insolation_flux": 0.652,
+    "eq_temp_k": 250.1,
+    "radius_earth": 1.08,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "GJ 1002 c",
+    "source": "confirmed",
+    "insolation_flux": 0.257,
+    "eq_temp_k": 181.7,
+    "radius_earth": 1.1,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "Teegarden's Star b",
+    "source": "confirmed",
+    "insolation_flux": 1.08,
+    "eq_temp_k": 277.0,
+    "radius_earth": 1.05,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "Kepler-438 b",
+    "source": "confirmed",
+    "insolation_flux": 1.4,
+    "eq_temp_k": 288.0,
+    "radius_earth": 1.12,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "Kepler-442 b",
+    "source": "confirmed",
+    "insolation_flux": 0.66,
+    "eq_temp_k": 241.0,
+    "radius_earth": 1.34,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "GJ 273 b",
+    "source": "confirmed",
+    "insolation_flux": 1.06,
+    "eq_temp_k": 292.47,
+    "radius_earth": 1.51,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "KOI-4940203",
+    "source": "candidates_predicted_real",
+    "insolation_flux": 0.87,
+    "eq_temp_k": 246.0,
+    "radius_earth": 1.31,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "KOI-3548044",
+    "source": "candidates_predicted_real",
+    "insolation_flux": 0.74,
+    "eq_temp_k": 237.0,
+    "radius_earth": 1.37,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "KOI-9674320",
+    "source": "candidates_predicted_real",
+    "insolation_flux": 0.54,
+    "eq_temp_k": 218.0,
+    "radius_earth": 1.59,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "KOI-10452252",
+    "source": "candidates_predicted_real",
+    "insolation_flux": 0.37,
+    "eq_temp_k": 199.0,
+    "radius_earth": 0.42,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "KOI-9084569",
+    "source": "candidates_predicted_real",
+    "insolation_flux": 0.44,
+    "eq_temp_k": 208.0,
+    "radius_earth": 0.97,
+    "hz_status": "conservative_hz"
+  },
+  {
+    "planet_name": "KOI-9210820",
+    "source": "candidates_predicted_real",
+    "insolation_flux": 0.29,
+    "eq_temp_k": 187.0,
+    "radius_earth": 1.37,
+    "hz_status": "optimistic_hz"
+  },
+  {
+    "planet_name": "KOI-8873873",
+    "source": "candidates_predicted_real",
+    "insolation_flux": 0.7,
+    "eq_temp_k": 233.0,
+    "radius_earth": 0.64,
+    "hz_status": "conservative_hz"
+  }
+]

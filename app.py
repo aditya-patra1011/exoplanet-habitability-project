@@ -30,7 +30,7 @@ page = st.sidebar.radio(
 
 # ----------- Overview Page --------------
 if page == "Overview":
-    st.title("Exoplanet Candidate Classification & Habitabilty Analysis")
+    st.title("Exoplanet Candidate Classification & Habitability Analysis")
     st.markdown("""
     - **Part A**: Classifying KOI CANDIDATE rows as likely planets or false positives, across six models and three feature tiers.
     - **Part B**: Habitable-zone (HZ) status and Earth Similarity Index (ESI) for confirmed + predicted-real planets.
@@ -41,7 +41,10 @@ if page == "Overview":
 
     numeric_cols = koi_labeled.select_dtypes(include=[np.number]).columns.tolist()
     exclude_from_selectors = ["target", "kepid"]
-    selectable_cols = [c for c in numeric_cols if c not in exclude_from_selectors]
+    selectable_cols = [
+        c for c in numeric_cols
+        if c not in exclude_from_selectors and koi_labeled[c].nunique() > 1
+    ]
 
     disposition_map = koi_labeled["target"].map({0: "False Positive", 1: "Confirmed"})
     koi_labeled_display = koi_labeled.copy()
@@ -61,9 +64,9 @@ if page == "Overview":
             template=PLOTLY_TEMPLATE, barmode="overlay", opacity=0.7, nbins=50
         )
         fig_hist.update_layout(height=CHART_HEIGHT)
-        st.plotly_chart(fig_hist, use_container_width=True)
+        st.plotly_chart(fig_hist, width="stretch")
     with c2:
-        st.markdown("**Disposition Markdown**")
+        st.markdown("**Disposition Breakdown**")
         disp_counts = koi_labeled_display["Disposition"].value_counts().reset_index()
         disp_counts.columns = ["Disposition", "count"]
         fig_pie = px.pie(
@@ -73,7 +76,7 @@ if page == "Overview":
             template=PLOTLY_TEMPLATE, hole=0.4
         )
         fig_pie.update_layout(height=CHART_HEIGHT)
-        st.plotly_chart(fig_pie, use_container_width=True)
+        st.plotly_chart(fig_pie, width="stretch")
 
     st.markdown("**Feature Relationship Scatter Plot**")
 
@@ -85,7 +88,7 @@ if page == "Overview":
         )
     with sc2:
         y_axis = st.selectbox(
-            "Y", selectable_cols,
+            "Y axis", selectable_cols,
             index=selectable_cols.index("koi_prad") if "koi_prad" in selectable_cols else 1
         )
 
@@ -94,9 +97,9 @@ if page == "Overview":
 
     sr1, sr2 = st.columns(2)
     with sr1:
-        x_range = st.slider(f"{x_axis} range", x_min, x_max, (x_min, x_max))
+        x_range = st.slider(f"{x_axis} range", x_min, x_max, (x_min, x_max), key=f"x_range_{x_axis}")
     with sr2:
-        y_range = st.slider(f"{y_axis} range", y_min, y_max, (y_min, y_max))
+        y_range = st.slider(f"{y_axis} range", y_min, y_max, (y_min, y_max), key=f"y_range_{y_axis}")
 
     scatter_data = koi_labeled_display[
         (koi_labeled_display[x_axis] >= x_range[0]) & (koi_labeled_display[x_axis] <= x_range[1]) &
@@ -109,7 +112,7 @@ if page == "Overview":
         hover_data=["kepid"] if "kepid" in scatter_data.columns else None
     )
     fig_scatter.update_layout(height=CHART_HEIGHT + 100)
-    st.plotly_chart(fig_scatter, use_container_width=True)
+    st.plotly_chart(fig_scatter, width="stretch")
     st.caption(f"Showing {len(scatter_data):,} of {len(koi_labeled):,} labeled rows within the selected ranges")
 
     st.markdown("---")
@@ -118,7 +121,7 @@ if page == "Overview":
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total KOI Rows", "9,564")
     col2.metric("Labeled (Confirmed + FP)", f"{len(koi_labeled):,}")
-    col3.metric("Candiates Evaluated:", f"{len(candidates_pred):,}")
+    col3.metric("Candidates Evaluated", f"{len(candidates_pred):,}")
     col4.metric("Predicted Real", f"{(candidates_pred['predicted_real'] == 1).sum():,}")
 
     col5, col6, col7 = st.columns(3)
@@ -136,15 +139,15 @@ elif page == "Part A: Candidate Classification":
 
     with c1:
         st.subheader("Target Distribution")
-        target_counts = koi_labeled["target"].value_counts().rename({0: "False Positives", 1: "Confirmed"})
+        target_counts = koi_labeled["target"].value_counts().rename({0: "False Positive", 1: "Confirmed"})
         fig = px.bar(
             x=target_counts.index, y=target_counts.values,
             color=target_counts.index,
-            color_discrete_map={"False Positives": "#d62728", "Confirmed": "#2ca02c"},
-            labels={"F1_mean": "F1 Score"}, range_x=[0.9, 1.0]
+            color_discrete_map={"False Positive": "#d62728", "Confirmed": "#2ca02c"},
+            labels={"x": "", "y": "Count"}, template=PLOTLY_TEMPLATE
         )
         fig.update_layout(height=CHART_HEIGHT, showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     with c2:
         st.subheader("Full-Tier Model F1 Comparison")
@@ -155,7 +158,7 @@ elif page == "Part A: Candidate Classification":
             labels={"F1_mean": "F1 Score"}, range_x=[0.9, 1.0]
         )
         fig2.update_layout(height=CHART_HEIGHT)
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width="stretch")
 
     st.subheader("Candidate Predictions")
     prob_threshold = st.slider("Minimum predicted-real probability", 0.0, 1.0, 0.5, 0.05)
@@ -164,7 +167,7 @@ elif page == "Part A: Candidate Classification":
     st.dataframe(
         filtered[["kepid", "predicted_real_probability", "predicted_real"]]
         .sort_values("predicted_real_probability", ascending=False).head(50),
-        use_container_width=True
+        width="stretch"
     )
 
 # ------------- Ablation Study Page ----------
@@ -179,11 +182,11 @@ elif page == "Ablation Study":
     c1, c2 = st.columns([1, 1.3])
     with c1:
         st.subheader("F1 by tier (table)")
-        st.dataframe(pivot.style.format("{:.4f}"), use_container_width=True)
+        st.dataframe(pivot.style.format("{:.4f}"), width="stretch")
 
     with c2:
         st.subheader("F1 Score Across Tiers")
-        tier_order = ["Full", "No-Score", "Raw physical"]
+        tier_order = ["Full", "No-score", "Raw physical"]
         plot_df = model_results[model_results["Tier"].isin(tier_order)]
         fig3 = px.bar(
             plot_df, x="Model", y="F1_mean", color="Tier",
@@ -191,12 +194,12 @@ elif page == "Ablation Study":
             template=PLOTLY_TEMPLATE, range_y=[0.9, 1.0]
         )
         fig3.update_layout(height=CHART_HEIGHT, xaxis_tickangle=-30)
-        st.plotly_chart(fig3, use_container_width=True)
+        st.plotly_chart(fig3, width="stretch")
 
     st.markdown("""
-    **Finding**: Tree-based models lose 2.0-2.5 F1 points moving Full -> Raw Physical; linear/kernel/neural
-    models lose 4.4-4.5 points. Raw physical features alone still yield F1 0.92-0.97, confirming real physical
-    signal independent of the vetting pipeline.
+    **Finding**: Moving Full -> Raw Physical, tree-based models lose 2.1-2.5 F1 points, the MLP loses 3.4, and
+    linear/kernel models lose 4.4-4.9. Raw physical features alone still yield F1 0.93-0.97, confirming real
+    physical signal independent of the vetting pipeline.
     """)
 
 # ------------ Part B --------------
@@ -216,10 +219,10 @@ elif page == "Part B: Habitability Scoring":
             template=PLOTLY_TEMPLATE
         )
         fig4.update_layout(height=CHART_HEIGHT)
-        st.plotly_chart(fig4, use_container_width=True)
+        st.plotly_chart(fig4, width="stretch")
 
     with c2:
-        st.subheader("Habitability Rate by Score")
+        st.subheader("Habitability Rate by Source")
         source_summary = habitability.groupby("source").agg(
             total=("planet_name", "count"),
             in_conservative_hz=("hz_status", lambda x: (x == "conservative_hz").sum()),
@@ -227,12 +230,12 @@ elif page == "Part B: Habitability Scoring":
             rocky_count=("likely_rocky", "sum")
         )
         source_summary["pct_conservative_hz"] = (source_summary["in_conservative_hz"] / source_summary["total"] * 100).round(2)
-        st.dataframe(source_summary, use_container_width=True)
+        st.dataframe(source_summary, width="stretch")
 
     st.subheader("Insolation Flux vs. Equilibrium Temperature")
     fig5 = px.scatter(
         habitability, x="insolation_flux", y="eq_temp_k", color="hz_status",
-        color_discrete_map={"outisde_hz": "#555555", "conservative_hz": "#2ca02c", "optimistic_hz": "#ff7f0e", "unknown": "#888888"},
+        color_discrete_map={"outside_hz": "#555555", "conservative_hz": "#2ca02c", "optimistic_hz": "#ff7f0e", "unknown": "#888888"},
         hover_data=["planet_name", "radius_earth"],
         template=PLOTLY_TEMPLATE, range_x=[0, 3]
     )
@@ -240,11 +243,12 @@ elif page == "Part B: Habitability Scoring":
     fig5.add_hline(y=288, line_dash="dash", line_color="white", opacity=0.5)
     fig5.add_annotation(x=1.0, y=288, text="Earth", showarrow=True, arrowhead=2)
     fig5.update_layout(height=CHART_HEIGHT + 100)
-    st.plotly_chart(fig5, use_container_width=True)
+    st.plotly_chart(fig5, width="stretch")
 
 # ------------------ Top Candidates Page -------------------
 elif page == "Top Habitable Candidates":
     st.title("Top Habitable Candidates by ESI")
+    st.caption("ESI here uses only radius and equilibrium temperature, so a high-ranking planet can still sit outside the habitable zone. Check the hz_status column.")
 
     n = st.slider("Number of top candidates to show", 5, 50, 20)
     top_esi = habitability.dropna(subset=["esi_score"]).sort_values("esi_score", ascending=False).head(n)
@@ -252,7 +256,7 @@ elif page == "Top Habitable Candidates":
     st.dataframe(
         top_esi[["planet_name", "source", "radius_earth", "eq_temp_k", "insolation_flux", "hz_status", "esi_score"]]
         .style.format({"radius_earth": "{:.3f}", "eq_temp_k": "{:.1f}", "insolation_flux": "{:.3f}", "esi_score": "{:.4f}"}),
-        use_container_width=True
+        width="stretch"
     )
 
     fig6 = px.scatter(
@@ -264,10 +268,10 @@ elif page == "Top Habitable Candidates":
     fig6.add_vline(x=1.0, line_dash="dash", line_color="gray", opacity=0.5)
     fig6.add_hline(y=288, line_dash="dash", line_color="gray", opacity=0.5)
     fig6.update_layout(height=CHART_HEIGHT + 120)
-    st.plotly_chart(fig6, use_container_width=True)
+    st.plotly_chart(fig6, width="stretch")
 
     st.subheader("Rocky + Habitable Zone Planets (Full List)")
     st.dataframe(
         rocky_hz[["planet_name", "source", "insolation_flux", "eq_temp_k", "radius_earth", "hz_status"]],
-        use_container_width=True
+        width="stretch"
     )

@@ -1,0 +1,10 @@
+{
+  "total_koi_rows": 9564,
+  "labeled_rows": 7587,
+  "candidates_evaluated": 1977,
+  "predicted_real": 1267,
+  "planets_evaluated": 7004,
+  "in_hz_count": 340,
+  "conservative_hz_pct": 3.21,
+  "optimistic_hz_pct": 4.85
+}

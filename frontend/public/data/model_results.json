@@ -1,0 +1,146 @@
+[
+  {
+    "Tier": "Full",
+    "Model": "Gradient Boosting",
+    "F1_mean": 0.9937767958609608,
+    "F1_std": 0.0025518522481737,
+    "AUC_mean": 0.9990209772296502,
+    "AUC_std": 0.000881745078133
+  },
+  {
+    "Tier": "Full",
+    "Model": "XGBoost",
+    "F1_mean": 0.9932125408426408,
+    "F1_std": 0.0022149983622064,
+    "AUC_mean": 0.9995510127558834,
+    "AUC_std": 0.0004242314227954
+  },
+  {
+    "Tier": "Full",
+    "Model": "Random Forest",
+    "F1_mean": 0.9884408555620278,
+    "F1_std": 0.0033242941047975,
+    "AUC_mean": 0.9993222630926988,
+    "AUC_std": 0.0004218623437075
+  },
+  {
+    "Tier": "Full",
+    "Model": "MLP (Deep Learning)",
+    "F1_mean": 0.98629855527155,
+    "F1_std": 0.0028179374757416,
+    "AUC_mean": 0.9982887757629332,
+    "AUC_std": 0.00055729523883
+  },
+  {
+    "Tier": "Full",
+    "Model": "SVM",
+    "F1_mean": 0.983468319202928,
+    "F1_std": 0.0032925504911869,
+    "AUC_mean": 0.9987350792862956,
+    "AUC_std": 0.000825204088134
+  },
+  {
+    "Tier": "Full",
+    "Model": "Logistic Regression",
+    "F1_mean": 0.9810336385067256,
+    "F1_std": 0.00392538558606,
+    "AUC_mean": 0.997479196947428,
+    "AUC_std": 0.0005483953651408
+  },
+  {
+    "Tier": "No-score",
+    "Model": "XGBoost",
+    "F1_mean": 0.9954595449268192,
+    "F1_std": 0.0018710848159724,
+    "AUC_mean": 0.9992263845052192,
+    "AUC_std": 0.0005533296775105
+  },
+  {
+    "Tier": "No-score",
+    "Model": "Gradient Boosting",
+    "F1_mean": 0.9949043801746223,
+    "F1_std": 0.002309312416129,
+    "AUC_mean": 0.9989400484887776,
+    "AUC_std": 0.0007950371655305
+  },
+  {
+    "Tier": "No-score",
+    "Model": "Random Forest",
+    "F1_mean": 0.9861747293545968,
+    "F1_std": 0.0054085438111926,
+    "AUC_mean": 0.9989592070020528,
+    "AUC_std": 0.000646924123152
+  },
+  {
+    "Tier": "No-score",
+    "Model": "MLP (Deep Learning)",
+    "F1_mean": 0.9842891770134116,
+    "F1_std": 0.0041154123624099,
+    "AUC_mean": 0.9977739394558066,
+    "AUC_std": 0.0007633307229108
+  },
+  {
+    "Tier": "No-score",
+    "Model": "SVM",
+    "F1_mean": 0.9702254059177056,
+    "F1_std": 0.0061684438920626,
+    "AUC_mean": 0.9967087541305956,
+    "AUC_std": 0.0008761476658055
+  },
+  {
+    "Tier": "No-score",
+    "Model": "Logistic Regression",
+    "F1_mean": 0.9695251135489632,
+    "F1_std": 0.0066043752666135,
+    "AUC_mean": 0.995229700601822,
+    "AUC_std": 0.0015345111674941
+  },
+  {
+    "Tier": "Raw physical",
+    "Model": "XGBoost",
+    "F1_mean": 0.9724243536119918,
+    "F1_std": 0.0034028128083909,
+    "AUC_mean": 0.9967147979944072,
+    "AUC_std": 0.0009183529161242
+  },
+  {
+    "Tier": "Raw physical",
+    "Model": "Gradient Boosting",
+    "F1_mean": 0.968675788723488,
+    "F1_std": 0.0042418610286077,
+    "AUC_mean": 0.9963147550642486,
+    "AUC_std": 0.000928258851248
+  },
+  {
+    "Tier": "Raw physical",
+    "Model": "Random Forest",
+    "F1_mean": 0.9631438456436634,
+    "F1_std": 0.0044811097534358,
+    "AUC_mean": 0.9956642526252808,
+    "AUC_std": 0.0012298281235272
+  },
+  {
+    "Tier": "Raw physical",
+    "Model": "MLP (Deep Learning)",
+    "F1_mean": 0.9527194756137676,
+    "F1_std": 0.0070349681651975,
+    "AUC_mean": 0.9925892783637238,
+    "AUC_std": 0.0005373086405769
+  },
+  {
+    "Tier": "Raw physical",
+    "Model": "Logistic Regression",
+    "F1_mean": 0.9366590000966736,
+    "F1_std": 0.0040826591570751,
+    "AUC_mean": 0.9889567578215211,
+    "AUC_std": 0.000877702070542
+  },
+  {
+    "Tier": "Raw physical",
+    "Model": "SVM",
+    "F1_mean": 0.9342291361966376,
+    "F1_std": 0.0064424392839682,
+    "AUC_mean": 0.9888933959986548,
+    "AUC_std": 0.0012352501006005
+  }
+]
