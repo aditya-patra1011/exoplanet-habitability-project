@@ -1,0 +1,44 @@
+[
+  {
+    "Model": "Gradient Boosting",
+    "Full": 0.9937767958609608,
+    "No-score": 0.9949043801746223,
+    "Raw physical": 0.968675788723488,
+    "Full_minus_RawPhysical": 0.025101007137472764
+  },
+  {
+    "Model": "Logistic Regression",
+    "Full": 0.9810336385067256,
+    "No-score": 0.9695251135489632,
+    "Raw physical": 0.9366590000966736,
+    "Full_minus_RawPhysical": 0.04437463841005207
+  },
+  {
+    "Model": "MLP (Deep Learning)",
+    "Full": 0.98629855527155,
+    "No-score": 0.9842891770134116,
+    "Raw physical": 0.9527194756137676,
+    "Full_minus_RawPhysical": 0.033579079657782396
+  },
+  {
+    "Model": "Random Forest",
+    "Full": 0.9884408555620278,
+    "No-score": 0.9861747293545968,
+    "Raw physical": 0.9631438456436634,
+    "Full_minus_RawPhysical": 0.025297009918364366
+  },
+  {
+    "Model": "SVM",
+    "Full": 0.983468319202928,
+    "No-score": 0.9702254059177056,
+    "Raw physical": 0.9342291361966376,
+    "Full_minus_RawPhysical": 0.04923918300629038
+  },
+  {
+    "Model": "XGBoost",
+    "Full": 0.9932125408426408,
+    "No-score": 0.9954595449268192,
+    "Raw physical": 0.9724243536119918,
+    "Full_minus_RawPhysical": 0.020788187230649013
+  }
+]

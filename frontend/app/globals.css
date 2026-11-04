@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* This dashboard is dark-only. Colours are set by Tailwind classes in layout.tsx. */
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}

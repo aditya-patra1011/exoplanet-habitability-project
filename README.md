@@ -17,7 +17,7 @@ This projects extends an earlier Kepler exoplanet classification project by appl
 
 - Trained on 7,587 labeled rows (2,748 `CONFIRMED`, 4,839 `FALSE POSITIVE`) using 5-fold group-aware cross-validation, grouped by host (`kepid`) to prevent star-level data leakage betweem training and validaiton folds.
 - Best full-feature model: **Gradient Boosting** (F1 = 0.9938), closely followed by XGBoost (F1 = 0.9932)
-- A three-tier ablation study (Full / No-score / Raw physical) found that removing NASA's own vetting pipeline outputs (`koi_score`, `koi_fpflag_*`) drops F1 by 2.0-2.5 points for three models and 4.4-5.4 points for linear/kernel/neural models - confirming that while vetting pipeline features contribute real signal, raw physical/transit measurements alone still produce all still produce strong classifiers (F1 0.93-0.97).
+- A three-tier ablation study (Full / No-score / Raw physical) found that removing NASA's own vetting pipeline outputs (`koi_score`, `koi_fpflag_*`) drops F1 by 2.1-2.5 points for tree models, 3.4 points for the MLP, and 4.4-4.9 points for linear/kernel models - confirming that while vetting pipeline features contribute real signal, raw physical/transit measurements alone still produce strong classifiers (F1 0.93-0.97).
 
 ### Part B - Habitability Scoring
 
@@ -25,7 +25,7 @@ This projects extends an earlier Kepler exoplanet classification project by appl
 - Computed habitable-zone status via insolation flux, using Kopparapu et al.-derived bounds (Conservative: 0.36-1.11 S⊕, Optimistic: 0.25-1.5 S⊕) and a radius-based rocky-planet filter (< 1.6 Earth radii).
 - **3.21%** of all evaluated planets falls in the conservative habitable zone; **4.85%** including the optimistic zone.
 - Confirmed planets and predicted-real candidates show nearly identical conservative-HZ rates (3.22% vs 3.16%) - a consistency check suggesting the Part A classifier isn't systematically biasing which candidates get flagged as real in a way that skews habitability outcomes.
-- Computed a simplified Earth Similarity Index (ESI) per planet. Recognizable, independently-confirmed habitable-zone exoplanets from published astronomy - TRAPPIST-1 e/f/g, Proxima Centauri b, Kepler-186f, Kepler-438b, TOI-700 d - land correctly in the top-ESI results, serving as an independent sanity check on the scoring methodology.
+- Computed a simplified Earth Similarity Index (ESI) per planet, using only radius and equilibrium temperature. Some well-known planets rank highly - Kepler-438 b (1st), TRAPPIST-1 d (3rd), Teegarden's Star b (6th), TOI-700 d (20th) - while others sit much lower: TRAPPIST-1 e (88th), Proxima Centauri b (266th), TRAPPIST-1 f (267th), TRAPPIST-1 g (499th), Kepler-186 f (825th). Because ESI ignores insolation flux, 24 of the top 50 fall outside the habitable zone, so it's a rough Earth-similarity measure rather than a habitability ranking.
 
 ## Dashboard
 
@@ -48,7 +48,7 @@ This projects extends an earlier Kepler exoplanet classification project by appl
 
 ### Top Habitable Candidates
 
-![Top Candidates ranked by Earth Similarity Index, with recognizable planets like TRAPPIST-1, Kepler-438b, and Proxima Cen b](docs/screenshots/top_candidates.png)
+![Top Candidates ranked by Earth Similarity Index, with recognizable planets like TRAPPIST-1 d, Kepler-438 b, and Proxima Cen d](docs/screenshots/top_candidates.png)
 
 ## Methodology
 

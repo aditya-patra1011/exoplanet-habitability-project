@@ -1,0 +1,18 @@
+[
+  {
+    "source": "candidates_predicted_real",
+    "total": 1267,
+    "in_conservative_hz": 40,
+    "in_optimistic_hz": 13,
+    "rocky_count": 653,
+    "pct_conservative_hz": 3.16
+  },
+  {
+    "source": "confirmed",
+    "total": 5737,
+    "in_conservative_hz": 185,
+    "in_optimistic_hz": 102,
+    "rocky_count": 1103,
+    "pct_conservative_hz": 3.22
+  }
+]
