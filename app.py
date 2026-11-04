@@ -8,6 +8,27 @@ st.set_page_config(page_title="Exoplanet Candidate & Habitability Dashboard", la
 
 CHART_HEIGHT = 380
 PLOTLY_TEMPLATE = "plotly_dark"
+PART_B_LABELS = 12
+PART_B_MAX_TEMP = 500
+PART_B_LABEL_GAP_FLUX = 0.3
+PART_B_LABEL_GAP_TEMP = 30
+
+
+def pick_spaced_labels(df):
+    """Pick the highest-ESI planets whose labels won't overlap one another."""
+    picked = []
+    for idx, row in df[df["eq_temp_k"] <= PART_B_MAX_TEMP].sort_values("esi_score", ascending=False).iterrows():
+        clear = all(
+            abs(row["insolation_flux"] - df.at[other, "insolation_flux"]) >= PART_B_LABEL_GAP_FLUX
+            or abs(row["eq_temp_k"] - df.at[other, "eq_temp_k"]) >= PART_B_LABEL_GAP_TEMP
+            for other in picked
+        )
+        if clear:
+            picked.append(idx)
+        if len(picked) == PART_B_LABELS:
+            break
+    return picked
+
 
 # --------- Data Loading -------------
 @st.cache_data
@@ -233,24 +254,37 @@ elif page == "Part B: Habitability Scoring":
         st.dataframe(source_summary, width="stretch")
 
     st.subheader("Insolation Flux vs. Equilibrium Temperature")
+    flux_plot = habitability[habitability["insolation_flux"] <= 3].dropna(subset=["esi_score"]).copy()
+    labeled_planets = pick_spaced_labels(flux_plot)
+    flux_plot["label"] = flux_plot["planet_name"].where(flux_plot.index.isin(labeled_planets), "")
     fig5 = px.scatter(
-        habitability, x="insolation_flux", y="eq_temp_k", color="hz_status",
-        color_discrete_map={"outside_hz": "#555555", "conservative_hz": "#2ca02c", "optimistic_hz": "#ff7f0e", "unknown": "#888888"},
-        hover_data=["planet_name", "radius_earth"],
-        template=PLOTLY_TEMPLATE, range_x=[0, 3]
+        flux_plot, x="insolation_flux", y="eq_temp_k", color="esi_score",
+        text="label", color_continuous_scale="Viridis",
+        hover_data=["planet_name", "radius_earth", "hz_status"],
+        template=PLOTLY_TEMPLATE, range_x=[0, 3], range_y=[0, PART_B_MAX_TEMP]
     )
-    fig5.add_vline(x=1.0, line_dash="dash", line_color="white", opacity=0.5)
-    fig5.add_hline(y=288, line_dash="dash", line_color="white", opacity=0.5)
-    fig5.add_annotation(x=1.0, y=288, text="Earth", showarrow=True, arrowhead=2)
-    fig5.update_layout(height=CHART_HEIGHT + 100)
+    fig5.update_traces(
+        textposition="top center",
+        textfont=dict(size=11, color="white", shadow="1px 1px 2px #0e1117, -1px -1px 2px #0e1117, 1px -1px 2px #0e1117, -1px 1px 2px #0e1117"),
+        marker=dict(size=8, line=dict(width=0.5, color="white"))
+    )
+    fig5.add_vrect(x0=0.36, x1=1.11, fillcolor="#2ca02c", opacity=0.12, line_width=0, layer="below",
+                   annotation_text="Conservative HZ", annotation_position="top left")
+    fig5.add_vrect(x0=0.25, x1=0.36, fillcolor="#ff7f0e", opacity=0.12, line_width=0, layer="below")
+    fig5.add_vrect(x0=1.11, x1=1.5, fillcolor="#ff7f0e", opacity=0.12, line_width=0, layer="below",
+                   annotation_text="Optimistic HZ", annotation_position="top left")
+    fig5.add_vline(x=1.0, line_dash="dash", line_color="gray", opacity=0.5)
+    fig5.add_hline(y=288, line_dash="dash", line_color="gray", opacity=0.5)
+    fig5.update_layout(height=CHART_HEIGHT + 220)
     st.plotly_chart(fig5, width="stretch")
+    hidden_hot = int((flux_plot["eq_temp_k"] > PART_B_MAX_TEMP).sum())
+    st.caption(f"Labels show high-ESI planets, skipping any that would overlap; hover over any point for its name. Dashed lines mark Earth (1.0 S⊕, 288 K). The axis stops at {PART_B_MAX_TEMP} K, so {hidden_hot} hotter planets are off the chart; double-click it to zoom out.")
 
 # ------------------ Top Candidates Page -------------------
 elif page == "Top Habitable Candidates":
     st.title("Top Habitable Candidates by ESI")
-    st.caption("ESI here uses only radius and equilibrium temperature, so a high-ranking planet can still sit outside the habitable zone. Check the hz_status column.")
 
-    n = st.slider("Number of top candidates to show", 5, 50, 20)
+    n = st.slider("Number of top candidates to show", 5, 50, 50)
     top_esi = habitability.dropna(subset=["esi_score"]).sort_values("esi_score", ascending=False).head(n)
 
     st.dataframe(
@@ -269,6 +303,7 @@ elif page == "Top Habitable Candidates":
     fig6.add_hline(y=288, line_dash="dash", line_color="gray", opacity=0.5)
     fig6.update_layout(height=CHART_HEIGHT + 120)
     st.plotly_chart(fig6, width="stretch")
+    st.caption("ESI here uses only radius and equilibrium temperature, so a high-ranking planet can still sit outside the habitable zone. Check the hz_status column.")
 
     st.subheader("Rocky + Habitable Zone Planets (Full List)")
     st.dataframe(

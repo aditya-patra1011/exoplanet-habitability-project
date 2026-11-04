@@ -4,6 +4,7 @@ import {
   PieChart,
   Pie,
   Cell,
+  LabelList,
   Tooltip,
   ResponsiveContainer,
   Legend,
@@ -11,15 +12,25 @@ import {
   Scatter,
   XAxis,
   YAxis,
+  ZAxis,
   CartesianGrid,
+  ReferenceArea,
   ReferenceLine,
-  ReferenceDot,
 } from "recharts";
+import EsiColorbar from "@/components/EsiColorbar";
 import LoadError from "@/components/LoadError";
 import PlanetTooltip from "@/components/PlanetTooltip";
+import PointLabel from "@/components/PointLabel";
 import { HZ_COLORS } from "@/lib/hz";
 import { HabitabilityRow, HabitabilityBySource } from "@/lib/types";
 import { useJson } from "@/lib/useJson";
+import { viridis } from "@/lib/viridis";
+
+const MAX_FLUX = 3;
+const MAX_TEMP = 500;
+const MAX_LABELS = 12;
+const LABEL_GAP_FLUX = 0.3;
+const LABEL_GAP_TEMP = 30;
 
 export default function HabitabilityPage() {
   const { data: habitabilityData, failed: habitabilityFailed } = useJson<
@@ -42,18 +53,39 @@ export default function HabitabilityPage() {
     color: HZ_COLORS[status] || "#888888",
   }));
 
-  const scatterByStatus = (
-    ["outside_hz", "conservative_hz", "optimistic_hz", "unknown"] as string[]
-  )
-    .map((status) => ({
-      status,
-      data: habitability.flatMap((d) =>
-        d.hz_status === status && d.insolation_flux <= 3 && d.eq_temp_k !== null
-          ? [{ x: d.insolation_flux, y: d.eq_temp_k, name: d.planet_name }]
-          : [],
-      ),
-    }))
-    .filter((group) => group.data.length > 0);
+  const inFluxRange = habitability.flatMap((d) =>
+    d.insolation_flux <= MAX_FLUX && d.eq_temp_k !== null && d.esi_score !== null
+      ? [
+          {
+            x: d.insolation_flux,
+            y: d.eq_temp_k,
+            name: d.planet_name,
+            esi: d.esi_score,
+          },
+        ]
+      : [],
+  );
+  const onChart = inFluxRange.filter((p) => p.y <= MAX_TEMP);
+  // Label the highest-ESI planets, skipping any that would overlap another label.
+  const labeled: typeof onChart = [];
+  for (const p of [...onChart].sort((a, b) => b.esi - a.esi)) {
+    if (labeled.length === MAX_LABELS) break;
+    const clear = labeled.every(
+      (other) =>
+        Math.abs(p.x - other.x) >= LABEL_GAP_FLUX ||
+        Math.abs(p.y - other.y) >= LABEL_GAP_TEMP,
+    );
+    if (clear) labeled.push(p);
+  }
+  const labeledNames = new Set(labeled.map((p) => p.name));
+  const points = onChart.map((p) => ({
+    ...p,
+    label: labeledNames.has(p.name) ? p.name : "",
+  }));
+  const hiddenHot = inFluxRange.length - points.length;
+  const esiValues = points.map((p) => p.esi);
+  const esiMin = esiValues.length > 0 ? Math.min(...esiValues) : 0;
+  const esiMax = esiValues.length > 0 ? Math.max(...esiValues) : 1;
 
   return (
     <div className="space-y-8">
@@ -125,62 +157,75 @@ export default function HabitabilityPage() {
         <h3 className="text-lg font-semibold mb-4">
           Insolation Flux vs. Equilibrium Temperature
         </h3>
-        <ResponsiveContainer width="100%" height={450}>
-          <ScatterChart margin={{ top: 20, right: 30, left: 10, bottom: 30 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-            <XAxis
-              type="number"
-              dataKey="x"
-              domain={[0, 3]}
-              stroke="#999"
-              label={{
-                value: "Insolation Flux (S⊕)",
-                position: "bottom",
-                fill: "#999",
-              }}
-            />
-            <YAxis
-              type="number"
-              dataKey="y"
-              stroke="#999"
-              label={{
-                value: "Equilibrium Temperature (K)",
-                angle: -90,
-                position: "insideLeft",
-                fill: "#999",
-              }}
-            />
-            <Tooltip
-              content={<PlanetTooltip xLabel="Flux (S⊕)" yLabel="Temp (K)" />}
-            />
-            <ReferenceLine
-              x={1.0}
-              stroke="#fff"
-              strokeDasharray="4 4"
-              opacity={0.5}
-            />
-            <ReferenceLine
-              y={288}
-              stroke="#fff"
-              strokeDasharray="4 4"
-              opacity={0.5}
-            />
-            <ReferenceDot x={1.0} y={288} r={5} fill="#fff" stroke="none" />
-            {scatterByStatus.map((group) => (
-              <Scatter
-                key={group.status}
-                name={group.status}
-                data={group.data}
-                fill={HZ_COLORS[group.status] || "#888888"}
-                opacity={0.6}
-              />
-            ))}
-            <Legend verticalAlign="top" />
-          </ScatterChart>
-        </ResponsiveContainer>
+        <div className="flex gap-3">
+          <div className="min-w-0 flex-1">
+            <ResponsiveContainer width="100%" height={600}>
+              <ScatterChart margin={{ top: 20, right: 30, left: 10, bottom: 30 }}>
+                <CartesianGrid vertical={false} stroke="#2a2e37" />
+                <ReferenceArea x1={0.36} x2={1.11} fill="#2ca02c" fillOpacity={0.12} stroke="none" />
+                <ReferenceArea x1={0.25} x2={0.36} fill="#ff7f0e" fillOpacity={0.12} stroke="none" />
+                <ReferenceArea x1={1.11} x2={1.5} fill="#ff7f0e" fillOpacity={0.12} stroke="none" />
+                <XAxis
+                  type="number"
+                  dataKey="x"
+                  domain={[0, MAX_FLUX]}
+                  stroke="#999"
+                  label={{
+                    value: "Insolation Flux (S⊕)",
+                    position: "bottom",
+                    fill: "#999",
+                  }}
+                />
+                <YAxis
+                  type="number"
+                  dataKey="y"
+                  domain={[0, MAX_TEMP]}
+                  stroke="#999"
+                  label={{
+                    value: "Equilibrium Temperature (K)",
+                    angle: -90,
+                    position: "insideLeft",
+                    fill: "#999",
+                  }}
+                />
+                <ZAxis range={[45, 45]} />
+                <Tooltip
+                  content={<PlanetTooltip xLabel="Flux (S⊕)" yLabel="Temp (K)" />}
+                />
+                <ReferenceLine
+                  x={1.0}
+                  stroke="#888"
+                  strokeDasharray="6 6"
+                  opacity={0.6}
+                />
+                <ReferenceLine
+                  y={288}
+                  stroke="#888"
+                  strokeDasharray="6 6"
+                  opacity={0.6}
+                />
+                <Scatter
+                  data={points}
+                  stroke="#fff"
+                  strokeWidth={0.5}
+                  isAnimationActive={false}
+                >
+                  {points.map((p, i) => (
+                    <Cell key={i} fill={viridis(p.esi, esiMin, esiMax)} />
+                  ))}
+                  <LabelList dataKey="label" content={PointLabel} />
+                </Scatter>
+              </ScatterChart>
+            </ResponsiveContainer>
+          </div>
+          <EsiColorbar min={esiMin} max={esiMax} />
+        </div>
         <p className="text-sm text-gray-400 mt-2">
-          The white dot marks Earth&apos;s own values (1.0 S⊕, 288 K) for
-          reference.
+          Green and orange bands mark the conservative and optimistic habitable
+          zones, and dashed lines mark Earth (1.0 S⊕, 288 K). Labels show
+          high-ESI planets, skipping any that would overlap; hover over any
+          point for its name. The axis stops at {MAX_TEMP} K, so {hiddenHot} hotter planets
+          are off the chart.
         </p>
       </div>
     </div>
