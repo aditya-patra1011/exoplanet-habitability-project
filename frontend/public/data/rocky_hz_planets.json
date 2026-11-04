@@ -248,7 +248,7 @@
     "hz_status": "conservative_hz"
   },
   {
-    "planet_name": "KOI-4940203",
+    "planet_name": "KOI-7711.01",
     "source": "candidates_predicted_real",
     "insolation_flux": 0.87,
     "eq_temp_k": 246.0,
@@ -256,7 +256,7 @@
     "hz_status": "conservative_hz"
   },
   {
-    "planet_name": "KOI-3548044",
+    "planet_name": "KOI-2194.03",
     "source": "candidates_predicted_real",
     "insolation_flux": 0.74,
     "eq_temp_k": 237.0,
@@ -264,7 +264,7 @@
     "hz_status": "conservative_hz"
   },
   {
-    "planet_name": "KOI-9674320",
+    "planet_name": "KOI-7223.01",
     "source": "candidates_predicted_real",
     "insolation_flux": 0.54,
     "eq_temp_k": 218.0,
@@ -272,7 +272,7 @@
     "hz_status": "conservative_hz"
   },
   {
-    "planet_name": "KOI-10452252",
+    "planet_name": "KOI-8012.01",
     "source": "candidates_predicted_real",
     "insolation_flux": 0.37,
     "eq_temp_k": 199.0,
@@ -280,7 +280,7 @@
     "hz_status": "conservative_hz"
   },
   {
-    "planet_name": "KOI-9084569",
+    "planet_name": "KOI-7923.01",
     "source": "candidates_predicted_real",
     "insolation_flux": 0.44,
     "eq_temp_k": 208.0,
@@ -288,7 +288,7 @@
     "hz_status": "conservative_hz"
   },
   {
-    "planet_name": "KOI-9210820",
+    "planet_name": "KOI-7930.01",
     "source": "candidates_predicted_real",
     "insolation_flux": 0.29,
     "eq_temp_k": 187.0,
@@ -296,7 +296,7 @@
     "hz_status": "optimistic_hz"
   },
   {
-    "planet_name": "KOI-8873873",
+    "planet_name": "KOI-8174.01",
     "source": "candidates_predicted_real",
     "insolation_flux": 0.7,
     "eq_temp_k": 233.0,

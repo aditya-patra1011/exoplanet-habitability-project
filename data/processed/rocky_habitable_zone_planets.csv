@@ -30,10 +30,10 @@ Teegarden's Star b,confirmed,1.08,277.0,1.05,1.16,4.90634,3034.0,Calar Alto Obse
 Kepler-438 b,confirmed,1.4,288.0,1.12,1.46,35.23319,3748.0,Kepler,optimistic_hz,True
 Kepler-442 b,confirmed,0.66,241.0,1.34,2.36,112.3053,4402.0,Kepler,conservative_hz,True
 GJ 273 b,confirmed,1.06,292.47,1.51,2.89,18.6498,3382.0,La Silla Observatory,conservative_hz,True
-KOI-4940203,candidates_predicted_real,0.87,246.0,1.31,,302.779824,5734.0,Kepler (candidate),conservative_hz,True
-KOI-3548044,candidates_predicted_real,0.74,237.0,1.37,,445.21685,5670.0,Kepler (candidate),conservative_hz,True
-KOI-9674320,candidates_predicted_real,0.54,218.0,1.59,,317.062416,5366.0,Kepler (candidate),conservative_hz,True
-KOI-10452252,candidates_predicted_real,0.37,199.0,0.42,,34.573718512,3374.0,Kepler (candidate),conservative_hz,True
-KOI-9084569,candidates_predicted_real,0.44,208.0,0.97,,395.13138,5060.0,Kepler (candidate),conservative_hz,True
-KOI-9210820,candidates_predicted_real,0.29,187.0,1.37,,377.67241,5031.0,Kepler (candidate),optimistic_hz,True
-KOI-8873873,candidates_predicted_real,0.7,233.0,0.64,,295.06066,5332.0,Kepler (candidate),conservative_hz,True
+KOI-7711.01,candidates_predicted_real,0.87,246.0,1.31,,302.779824,5734.0,Kepler (candidate),conservative_hz,True
+KOI-2194.03,candidates_predicted_real,0.74,237.0,1.37,,445.21685,5670.0,Kepler (candidate),conservative_hz,True
+KOI-7223.01,candidates_predicted_real,0.54,218.0,1.59,,317.062416,5366.0,Kepler (candidate),conservative_hz,True
+KOI-8012.01,candidates_predicted_real,0.37,199.0,0.42,,34.573718512,3374.0,Kepler (candidate),conservative_hz,True
+KOI-7923.01,candidates_predicted_real,0.44,208.0,0.97,,395.13138,5060.0,Kepler (candidate),conservative_hz,True
+KOI-7930.01,candidates_predicted_real,0.29,187.0,1.37,,377.67241,5031.0,Kepler (candidate),optimistic_hz,True
+KOI-8174.01,candidates_predicted_real,0.7,233.0,0.64,,295.06066,5332.0,Kepler (candidate),conservative_hz,True
