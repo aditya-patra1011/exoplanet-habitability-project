@@ -52,7 +52,7 @@ The project has two dashboards, both built from the same processed data:
 
 ### Part B - Habitability Scoring
 
-![Insolation flux vs. Equilibrium temperature, colored by HZ status](docs/screenshots/habitability_scatter.png)
+![Insolation flux vs. Equilibrium temperature, colored by ESI, with habitable zones shaded](docs/screenshots/habitability_scatter.png)
 
 ### Top Habitable Candidates
 
