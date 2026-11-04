@@ -15,10 +15,10 @@
   },
   {
     "Model": "MLP (Deep Learning)",
-    "Full": 0.98629855527155,
-    "No-score": 0.9842891770134116,
-    "Raw physical": 0.9527194756137676,
-    "Full_minus_RawPhysical": 0.033579079657782396
+    "Full": 0.985924058650783,
+    "No-score": 0.985400701530678,
+    "Raw physical": 0.9533538399614404,
+    "Full_minus_RawPhysical": 0.03257021868934262
   },
   {
     "Model": "Random Forest",

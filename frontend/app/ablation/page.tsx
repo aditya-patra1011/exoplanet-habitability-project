@@ -121,7 +121,7 @@ export default function AblationPage() {
         <p className="text-gray-300">
           Moving from Full to Raw physical features, tree-based models (XGBoost,
           Gradient Boosting, Random Forest) lose 2.1–2.5 F1 points, the MLP
-          loses 3.4, and linear/kernel models (Logistic Regression, SVM) lose
+          loses 3.3, and linear/kernel models (Logistic Regression, SVM) lose
           4.4–4.9. Raw physical features alone still yield F1 0.93–0.97,
           confirming real physical signal exists independent of the vetting
           pipeline.

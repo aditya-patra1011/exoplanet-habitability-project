@@ -17,7 +17,7 @@ This projects extends an earlier Kepler exoplanet classification project by appl
 
 - Trained on 7,587 labeled rows (2,748 `CONFIRMED`, 4,839 `FALSE POSITIVE`) using 5-fold group-aware cross-validation, grouped by host (`kepid`) to prevent star-level data leakage betweem training and validaiton folds.
 - Best full-feature model: **Gradient Boosting** (F1 = 0.9938), closely followed by XGBoost (F1 = 0.9932)
-- A three-tier ablation study (Full / No-score / Raw physical) found that removing NASA's own vetting pipeline outputs (`koi_score`, `koi_fpflag_*`) drops F1 by 2.1-2.5 points for tree models, 3.4 points for the MLP, and 4.4-4.9 points for linear/kernel models - confirming that while vetting pipeline features contribute real signal, raw physical/transit measurements alone still produce strong classifiers (F1 0.93-0.97).
+- A three-tier ablation study (Full / No-score / Raw physical) found that removing NASA's own vetting pipeline outputs (`koi_score`, `koi_fpflag_*`) drops F1 by 2.1-2.5 points for tree models, 3.3 points for the MLP, and 4.4-4.9 points for linear/kernel models - confirming that while vetting pipeline features contribute real signal, raw physical/transit measurements alone still produce strong classifiers (F1 0.93-0.97).
 
 ### Part B - Habitability Scoring
 

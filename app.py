@@ -109,7 +109,7 @@ if page == "Overview":
         scatter_data, x=x_axis, y=y_axis, color="Disposition",
         color_discrete_map={"False Positive": "#d62728", "Confirmed": "#2ca02c"},
         template=PLOTLY_TEMPLATE, opacity=0.6,
-        hover_data=["kepid"] if "kepid" in scatter_data.columns else None
+        hover_data=["kepoi_name", "kepid"]
     )
     fig_scatter.update_layout(height=CHART_HEIGHT + 100)
     st.plotly_chart(fig_scatter, width="stretch")
@@ -165,7 +165,7 @@ elif page == "Part A: Candidate Classification":
     filtered = candidates_pred[candidates_pred["predicted_real_probability"] >= prob_threshold]
     st.write(f"{len(filtered):,} CANDIDATE rows meet this threshold")
     st.dataframe(
-        filtered[["kepid", "predicted_real_probability", "predicted_real"]]
+        filtered[["kepoi_name", "kepid", "predicted_real_probability", "predicted_real"]]
         .sort_values("predicted_real_probability", ascending=False).head(50),
         width="stretch"
     )
@@ -197,7 +197,7 @@ elif page == "Ablation Study":
         st.plotly_chart(fig3, width="stretch")
 
     st.markdown("""
-    **Finding**: Moving Full -> Raw Physical, tree-based models lose 2.1-2.5 F1 points, the MLP loses 3.4, and
+    **Finding**: Moving Full -> Raw Physical, tree-based models lose 2.1-2.5 F1 points, the MLP loses 3.3, and
     linear/kernel models lose 4.4-4.9. Raw physical features alone still yield F1 0.93-0.97, confirming real
     physical signal independent of the vetting pipeline.
     """)
